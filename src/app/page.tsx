@@ -58,7 +58,7 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="bg-[#EAF4FA] px-6 py-20">
         <div className="mx-auto max-w-content">
           <Reveal>
             <h2 className="font-display text-3xl text-lab-ink sm:text-4xl">
@@ -72,19 +72,19 @@ export default function HomePage() {
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {labCapabilities.map((group, i) => (
               <Reveal key={group.title} delay={i * 0.05}>
-                <OutlinedCard>
+                <div className="shimmer-card h-full transition duration-200 ease-outCubic">
                   <h3 className="font-display text-xl text-lab-ink">
                     {group.title}
                   </h3>
                   <ul className="mt-4 space-y-2 text-sm text-lab-muted">
                     {group.items.map((item) => (
                       <li key={item} className="flex gap-2">
-                        <span className="mt-2 h-1 w-1 rounded-full bg-lab-teal" />
+                        <span className="mt-2 h-1 w-1 rounded-full bg-sky-500" />
                         {item}
                       </li>
                     ))}
                   </ul>
-                </OutlinedCard>
+                </div>
               </Reveal>
             ))}
           </div>
