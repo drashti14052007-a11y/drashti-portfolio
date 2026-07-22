@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@/components/Icons";
 import { GhostLink } from "@/components/GhostButton";
 import { OutlinedCard, Reveal } from "@/components/Reveal";
 import { projects } from "@/lib/projects";

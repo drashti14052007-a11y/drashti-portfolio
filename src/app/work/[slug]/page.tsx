@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink } from "@/components/Icons";
 import { GhostLink } from "@/components/GhostButton";
 import { OutlinedCard, Reveal } from "@/components/Reveal";
 import {
