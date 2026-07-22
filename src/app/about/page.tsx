@@ -27,7 +27,7 @@ export default function AboutPage() {
           <Reveal>
             <div className="overflow-hidden rounded-card border border-lab-line">
               <Image
-                src="/images/portrait.png"
+                src="/images/portrait.jpg"
                 alt="Professional portrait of Drashti Patel"
                 width={720}
                 height={900}
@@ -37,7 +37,7 @@ export default function AboutPage() {
             </div>
             <div className="mt-4 overflow-hidden rounded-card border border-lab-line">
               <Image
-                src="/images/lab-coat.png"
+                src="/images/lab-coat.jpg"
                 alt="Drashti Patel wearing a lab coat"
                 width={720}
                 height={900}

@@ -102,7 +102,7 @@ export default function HomePage() {
           <Reveal delay={0.1}>
             <div className="overflow-hidden rounded-card border border-lab-line bg-lab-bg">
               <Image
-                src="/images/lab-coat.png"
+                src="/images/lab-coat.jpg"
                 alt="Drashti Patel in a white lab coat"
                 width={720}
                 height={900}
