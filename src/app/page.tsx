@@ -19,18 +19,20 @@ export default function HomePage() {
             alt=""
             fill
             priority
-            className="object-cover opacity-[0.28] sm:opacity-[0.32]"
+            className="object-cover object-center opacity-70"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-lab-bg/55 via-lab-bg/75 to-lab-bg" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(247,248,248,0.15),rgba(247,248,248,0.85)_70%)]" />
+          {/* Light veil for text readability — keep lab image visible */}
+          <div className="absolute inset-0 bg-lab-bg/35" />
+          <div className="absolute inset-0 bg-gradient-to-r from-lab-bg/70 via-lab-bg/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-lab-bg via-transparent to-lab-bg/30" />
         </div>
-        <div className="relative mx-auto max-w-content">
+        <div className="relative z-10 mx-auto max-w-content">
           <Reveal>
             <p className="mb-4 text-xs uppercase tracking-[0.22em] text-lab-muted">
               Food Processing Technology · R&D
             </p>
-            <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-lab-ink sm:text-6xl md:text-7xl">
+            <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-lab-ink drop-shadow-[0_1px_12px_rgba(247,248,248,0.9)] sm:text-6xl md:text-7xl">
               {site.name}
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-lab-muted sm:text-xl">
