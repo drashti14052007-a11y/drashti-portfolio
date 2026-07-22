@@ -13,7 +13,18 @@ export default function HomePage() {
   return (
     <div>
       <section className="relative overflow-hidden px-6 pb-20 pt-32 sm:pt-40">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(47,111,115,0.06),transparent_40%),radial-gradient(circle_at_80%_0%,rgba(30,36,48,0.04),transparent_35%)]" />
+        <div className="pointer-events-none absolute inset-0">
+          <Image
+            src="/images/hero-lab-atmosphere.png"
+            alt=""
+            fill
+            priority
+            className="object-cover opacity-[0.28] sm:opacity-[0.32]"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-lab-bg/55 via-lab-bg/75 to-lab-bg" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(247,248,248,0.15),rgba(247,248,248,0.85)_70%)]" />
+        </div>
         <div className="relative mx-auto max-w-content">
           <Reveal>
             <p className="mb-4 text-xs uppercase tracking-[0.22em] text-lab-muted">
