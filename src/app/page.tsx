@@ -19,23 +19,22 @@ export default function HomePage() {
             alt=""
             fill
             priority
-            className="object-cover object-center opacity-70"
+            className="object-cover object-center opacity-95"
             sizes="100vw"
           />
-          {/* Light veil for text readability — keep lab image visible */}
-          <div className="absolute inset-0 bg-lab-bg/35" />
-          <div className="absolute inset-0 bg-gradient-to-r from-lab-bg/70 via-lab-bg/25 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-lab-bg via-transparent to-lab-bg/30" />
+          {/* Soft readability veil only near text — keep lab scene clearly visible */}
+          <div className="absolute inset-0 bg-gradient-to-r from-lab-bg/55 via-lab-bg/15 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-lab-bg to-transparent" />
         </div>
         <div className="relative z-10 mx-auto max-w-content">
           <Reveal>
             <p className="mb-4 text-xs uppercase tracking-[0.22em] text-lab-muted">
               Food Processing Technology · R&D
             </p>
-            <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-lab-ink drop-shadow-[0_1px_12px_rgba(247,248,248,0.9)] sm:text-6xl md:text-7xl">
+            <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-lab-ink drop-shadow-[0_2px_18px_rgba(247,248,248,0.95)] sm:text-6xl md:text-7xl">
               {site.name}
             </h1>
-            <p className="mt-6 max-w-2xl text-lg text-lab-muted sm:text-xl">
+            <p className="mt-6 max-w-2xl text-lg text-lab-ink/80 sm:text-xl">
               {site.oneLiner}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -113,23 +112,25 @@ export default function HomePage() {
             </GhostLink>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-md">
-              <div className="absolute left-0 top-0 h-[88%] w-[78%] overflow-hidden rounded-card border border-lab-line bg-lab-bg">
+            <div className="relative mx-auto h-[28rem] w-full max-w-md sm:h-[32rem]">
+              {/* Back layer — faded lab coat (Concept C) */}
+              <div className="absolute left-2 top-2 h-[85%] w-[78%] overflow-hidden rounded-card border border-lab-line/70 bg-lab-bg shadow-sm">
                 <Image
                   src="/images/lab-coat.jpg"
                   alt=""
                   fill
-                  className="object-cover object-top opacity-45"
+                  className="object-cover object-top opacity-55 saturate-75"
                   sizes="(max-width: 768px) 80vw, 360px"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-white/20" />
+                <div className="absolute inset-0 bg-white/25" />
               </div>
-              <div className="absolute bottom-0 right-0 h-[86%] w-[76%] overflow-hidden rounded-card border border-lab-line bg-white shadow-lift">
+              {/* Front layer — sharp new portrait, offset like the mockup */}
+              <div className="absolute bottom-0 right-0 z-10 h-[82%] w-[72%] overflow-hidden rounded-card border border-white bg-white shadow-[0_18px_50px_rgba(30,36,48,0.18)] ring-1 ring-lab-line/60">
                 <Image
                   src="/images/portfolio.jpeg"
                   alt="Drashti Patel professional portrait"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-[center_15%]"
                   sizes="(max-width: 768px) 80vw, 360px"
                   priority
                 />
