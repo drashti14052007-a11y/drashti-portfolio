@@ -111,15 +111,27 @@ export default function HomePage() {
             </GhostLink>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="overflow-hidden rounded-card border border-lab-line bg-lab-bg">
-              <Image
-                src="/images/lab-coat.jpg"
-                alt="Drashti Patel in a white lab coat"
-                width={720}
-                height={900}
-                className="h-auto w-full object-cover"
-                priority
-              />
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-md">
+              <div className="absolute left-0 top-0 h-[88%] w-[78%] overflow-hidden rounded-card border border-lab-line bg-lab-bg">
+                <Image
+                  src="/images/lab-coat.jpg"
+                  alt=""
+                  fill
+                  className="object-cover object-top opacity-45"
+                  sizes="(max-width: 768px) 80vw, 360px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-white/20" />
+              </div>
+              <div className="absolute bottom-0 right-0 h-[86%] w-[76%] overflow-hidden rounded-card border border-lab-line bg-white shadow-lift">
+                <Image
+                  src="/images/portfolio.jpeg"
+                  alt="Drashti Patel professional portrait"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 80vw, 360px"
+                  priority
+                />
+              </div>
             </div>
           </Reveal>
         </div>
