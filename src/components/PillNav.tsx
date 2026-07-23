@@ -1,19 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Menu, X } from "@/components/Icons";
 import { navItems, site } from "@/lib/site";
 import { cn } from "@/lib/cn";
 
-const sectionIds = navItems.map((item) => item.id);
-
 export function PillNav() {
   const pathname = usePathname();
-  const onHome = pathname === "/";
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState("home");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -22,78 +19,14 @@ export function PillNav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Seed active from hash (home or after redirect)
   useEffect(() => {
-    if (!onHome) {
-      setActive("");
-      return;
-    }
-    const hash = window.location.hash.replace("#", "");
-    if (hash && sectionIds.includes(hash as (typeof sectionIds)[number])) {
-      setActive(hash);
-    } else {
-      setActive("home");
-    }
-  }, [onHome]);
-
-  useEffect(() => {
-    if (!onHome) return;
-
-    const elements = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => Boolean(el));
-
-    if (!elements.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              Math.abs(a.boundingClientRect.top) -
-              Math.abs(b.boundingClientRect.top),
-          );
-
-        if (visible[0]?.target?.id) {
-          setActive(visible[0].target.id);
-        }
-      },
-      {
-        root: null,
-        // Prefer the section occupying the upper-middle of the viewport
-        rootMargin: "-35% 0px -45% 0px",
-        threshold: [0, 0.1, 0.25, 0.5],
-      },
-    );
-
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [onHome]);
-
-  const scrollTo = useCallback(
-    (id: string) => {
-      setOpen(false);
-
-      // Case studies / other routes → jump home to that section
-      if (!onHome) {
-        window.location.href = `/#${id}`;
-        return;
-      }
-
-      const el = document.getElementById(id);
-      if (!el) return;
-      setActive(id);
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      history.replaceState(null, "", `/#${id}`);
-    },
-    [onHome],
-  );
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <>
       <a
-        href="#home"
+        href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:shadow-dock"
       >
         Skip to content
@@ -107,47 +40,44 @@ export function PillNav() {
             scrolled && "-translate-y-0.5",
           )}
         >
-          <button
-            type="button"
-            onClick={() => scrollTo("home")}
+          <Link
+            href="/"
             className="hidden rounded-pill px-3 py-2 text-xs font-semibold tracking-[0.14em] text-lab-ink sm:inline"
           >
             DP
-          </button>
+          </Link>
 
           <div className="hidden items-center gap-1 md:flex">
             {navItems.map((item) => {
-              const isActive = onHome && active === item.id;
+              const active =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(item.href);
               return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => scrollTo(item.id)}
-                  aria-current={isActive ? "true" : undefined}
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
                     "relative rounded-pill px-3 py-2 text-sm text-lab-muted transition-colors hover:text-lab-ink",
-                    isActive && "text-lab-ink",
+                    active && "text-lab-ink",
                   )}
                 >
                   {item.label}
-                  <span
-                    className={cn(
-                      "absolute inset-x-3 -bottom-0.5 h-px bg-lab-teal transition-opacity duration-200",
-                      isActive ? "opacity-100" : "opacity-0",
-                    )}
-                  />
-                </button>
+                  {active && (
+                    <span className="absolute inset-x-3 -bottom-0.5 h-px bg-lab-teal" />
+                  )}
+                </Link>
               );
             })}
           </div>
 
-          <button
-            type="button"
-            onClick={() => scrollTo("contact")}
+          <Link
+            href="/contact"
             className="rounded-pill border border-lab-ink/20 px-3 py-2 text-sm text-lab-ink transition hover:border-lab-teal hover:text-lab-teal"
           >
             Contact
-          </button>
+          </Link>
 
           <button
             type="button"
@@ -172,19 +102,13 @@ export function PillNav() {
           </p>
           <div className="flex flex-col gap-2">
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => scrollTo(item.id)}
-                className={cn(
-                  "rounded-card border border-lab-line bg-white px-4 py-3 text-left text-lg text-lab-ink",
-                  onHome &&
-                    active === item.id &&
-                    "border-lab-teal text-lab-teal",
-                )}
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-card border border-lab-line bg-white px-4 py-3 text-lg text-lab-ink"
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
           </div>
         </div>
