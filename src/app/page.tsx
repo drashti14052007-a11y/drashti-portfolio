@@ -113,25 +113,29 @@ export default function HomePage() {
           </Reveal>
           <Reveal delay={0.1}>
             <div className="relative mx-auto h-[28rem] w-full max-w-md sm:h-[32rem]">
-              {/* Back layer — faded lab coat (Concept C) */}
-              <div className="absolute left-2 top-2 h-[85%] w-[78%] overflow-hidden rounded-card border border-lab-line/70 bg-lab-bg shadow-sm">
+              {/* Back layer — lab coat dissolves into the page background */}
+              <div className="absolute left-0 top-0 h-full w-[88%] overflow-hidden">
                 <Image
                   src="/images/lab-coat.jpg"
                   alt=""
                   fill
-                  className="object-cover object-top opacity-55 saturate-75"
-                  sizes="(max-width: 768px) 80vw, 360px"
+                  className="object-cover object-top opacity-40 saturate-50"
+                  sizes="(max-width: 768px) 85vw, 400px"
                 />
-                <div className="absolute inset-0 bg-white/25" />
+                {/* Soft fade into surrounding white background on all edges */}
+                <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-white/90" />
+                <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-white" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/50" />
+                <div className="absolute inset-0 bg-white/20" />
               </div>
-              {/* Front layer — sharp new portrait, offset like the mockup */}
-              <div className="absolute bottom-0 right-0 z-10 h-[82%] w-[72%] overflow-hidden rounded-card border border-white bg-white shadow-[0_18px_50px_rgba(30,36,48,0.18)] ring-1 ring-lab-line/60">
+              {/* Front layer — sharp portrait stays crisp */}
+              <div className="absolute bottom-2 right-0 z-10 h-[78%] w-[68%] overflow-hidden rounded-card border border-white bg-white shadow-[0_18px_50px_rgba(30,36,48,0.16)] ring-1 ring-lab-line/50">
                 <Image
                   src="/images/portfolio.jpeg"
                   alt="Drashti Patel professional portrait"
                   fill
                   className="object-cover object-[center_15%]"
-                  sizes="(max-width: 768px) 80vw, 360px"
+                  sizes="(max-width: 768px) 70vw, 320px"
                   priority
                 />
               </div>
