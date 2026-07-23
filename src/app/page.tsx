@@ -12,7 +12,7 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* 1 — Hero Mix 3: oversized CAPS name + academics inside slide */}
+      {/* 1 — Hero Mix 3: oversized CAPS Lexend name + academics inside slide */}
       <section className="relative flex min-h-[100svh] flex-col overflow-hidden px-6 pt-28 sm:pt-32">
         <div className="pointer-events-none absolute inset-0">
           <Image
@@ -20,10 +20,11 @@ export default function HomePage() {
             alt=""
             fill
             priority
-            className="object-cover object-center opacity-[0.92]"
+            className="object-cover object-center opacity-95"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/25 to-white/75" />
+          {/* Same soft white fade as visualized Mix 3 */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/30 to-white/80" />
         </div>
 
         <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center py-8 text-center sm:py-12">
@@ -34,7 +35,7 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <h1 className="mt-5 w-full font-display font-medium uppercase leading-[0.88] tracking-[-0.03em] text-lab-ink drop-shadow-[0_2px_22px_rgba(255,255,255,0.95)]">
+            <h1 className="mt-5 w-full font-lexend font-bold uppercase leading-[0.9] tracking-[-0.02em] text-lab-ink drop-shadow-[0_2px_22px_rgba(255,255,255,0.95)]">
               <span className="block text-[clamp(3.8rem,16vw,10.5rem)]">
                 Drashti
               </span>
@@ -113,9 +114,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3 — Story: larger lab-coat face + sharp front portrait */}
+      {/* 3 — Story: lab coat only, face clearly visible */}
       <section className="bg-[#F4F7F8] px-6 py-20 sm:py-24">
-        <div className="mx-auto grid max-w-content items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+        <div className="mx-auto grid max-w-content items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.18em] text-lab-muted">
               Why I build
@@ -134,37 +135,21 @@ export default function HomePage() {
             </GhostLink>
           </Reveal>
 
-          <div className="relative mx-auto h-[30rem] w-full max-w-lg sm:h-[36rem]">
-            <Reveal
-              delay={0.05}
-              className="absolute inset-y-0 left-0 w-[92%] overflow-hidden"
-            >
+          <Reveal delay={0.08}>
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden sm:max-w-lg">
               <Image
                 src="/images/lab-coat.jpg"
                 alt="Drashti Patel in a lab coat"
                 fill
-                className="object-cover object-[center_12%] opacity-70 saturate-[0.85]"
+                className="object-cover object-[center_10%]"
                 sizes="(max-width: 1024px) 90vw, 520px"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#F4F7F8] via-transparent to-[#F4F7F8]/80" />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#F4F7F8]/70 via-transparent to-[#F4F7F8]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#F4F7F8] via-transparent to-transparent" />
-            </Reveal>
-
-            <Reveal
-              delay={0.18}
-              className="absolute bottom-0 right-0 z-10 h-[72%] w-[58%] overflow-hidden rounded-card border border-white bg-white shadow-[0_20px_55px_rgba(30,36,48,0.16)] ring-1 ring-lab-line/40 sm:w-[55%]"
-            >
-              <Image
-                src="/images/portfolio.jpeg"
-                alt="Drashti Patel professional portrait"
-                fill
-                className="object-cover object-[center_12%]"
-                sizes="(max-width: 1024px) 55vw, 300px"
                 priority
               />
-            </Reveal>
-          </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-[#F4F7F8] via-transparent to-[#F4F7F8]/50" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#F4F7F8]/40 via-transparent to-[#F4F7F8]/85" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#F4F7F8] via-transparent to-transparent" />
+            </div>
+          </Reveal>
         </div>
       </section>
 

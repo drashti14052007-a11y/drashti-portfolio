@@ -23,6 +23,7 @@ const config: Config = {
         display: ["var(--font-fraunces)", "Georgia", "serif"],
         sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
         mono: ["var(--font-jetbrains)", "ui-monospace", "monospace"],
+        lexend: ["var(--font-lexend)", "system-ui", "sans-serif"],
       },
       maxWidth: {
         content: "72rem",

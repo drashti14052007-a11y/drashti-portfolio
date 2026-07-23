@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Manrope, JetBrains_Mono, Lexend } from "next/font/google";
 import { PillNav } from "@/components/PillNav";
 import { Footer } from "@/components/Footer";
 import { site } from "@/lib/site";
@@ -21,6 +21,13 @@ const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains",
   display: "swap",
+});
+
+const lexend = Lexend({
+  subsets: ["latin"],
+  variable: "--font-lexend",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -46,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${fraunces.variable} ${manrope.variable} ${jetbrains.variable} min-h-screen antialiased`}
+        className={`${fraunces.variable} ${manrope.variable} ${jetbrains.variable} ${lexend.variable} min-h-screen antialiased`}
       >
         <PillNav />
         <main id="main">{children}</main>
