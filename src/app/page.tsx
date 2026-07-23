@@ -12,7 +12,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <section className="relative overflow-hidden px-6 pb-20 pt-32 sm:pt-40">
+      <section className="relative flex min-h-[100svh] flex-col overflow-hidden px-6 pt-28 sm:pt-32">
         <div className="pointer-events-none absolute inset-0">
           <Image
             src="/images/hero-lab-atmosphere.png"
@@ -22,22 +22,36 @@ export default function HomePage() {
             className="object-cover object-center opacity-95"
             sizes="100vw"
           />
-          {/* Soft readability veil only near text — keep lab scene clearly visible */}
-          <div className="absolute inset-0 bg-gradient-to-r from-lab-bg/55 via-lab-bg/15 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-lab-bg to-transparent" />
+          <div className="absolute inset-0 bg-lab-bg/20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-lab-bg/45 via-transparent to-lab-bg/70" />
         </div>
-        <div className="relative z-10 mx-auto max-w-content">
+
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center py-10 text-center sm:py-14">
           <Reveal>
-            <p className="mb-4 text-xs uppercase tracking-[0.22em] text-lab-muted">
+            <p className="text-[0.7rem] uppercase tracking-[0.28em] text-lab-muted sm:text-xs">
               Food Processing Technology · R&D
             </p>
-            <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-lab-ink drop-shadow-[0_2px_18px_rgba(247,248,248,0.95)] sm:text-6xl md:text-7xl">
-              {site.name}
+          </Reveal>
+
+          <Reveal delay={0.06}>
+            <h1 className="mt-6 w-full font-display font-medium leading-[0.9] tracking-[-0.04em] text-lab-ink drop-shadow-[0_2px_20px_rgba(247,248,248,0.9)]">
+              <span className="block text-[clamp(3.4rem,14vw,9.5rem)]">
+                Drashti
+              </span>
+              <span className="mt-1 block text-[clamp(3.4rem,14vw,9.5rem)]">
+                Patel
+              </span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg text-lab-ink/80 sm:text-xl">
+          </Reveal>
+
+          <Reveal delay={0.12}>
+            <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-lab-ink/80 sm:mt-10 sm:text-lg">
               {site.oneLiner}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+          </Reveal>
+
+          <Reveal delay={0.18}>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
               <GhostLink href="/work">
                 Explore my work <ArrowRight size={16} />
               </GhostLink>
@@ -47,16 +61,20 @@ export default function HomePage() {
             </div>
           </Reveal>
         </div>
-      </section>
 
-      <section className="border-y border-lab-line bg-white px-6 py-8">
-        <Reveal className="mx-auto flex max-w-content flex-col gap-2 text-sm text-lab-muted sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-8 sm:gap-y-2">
-          <span className="text-lab-ink">{site.education.degree}</span>
-          <span>{site.education.school}</span>
-          <span>{site.education.university}</span>
-          <span>{site.education.year}</span>
-          <span>{site.location}</span>
-        </Reveal>
+        <div className="relative z-10 border-t border-lab-line/80 bg-white/90 px-2 py-5 sm:py-6">
+          <Reveal className="mx-auto flex max-w-content flex-col items-center gap-2 text-center text-sm text-lab-muted sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-7 sm:gap-y-2 sm:text-left">
+            <span className="text-lab-ink">{site.education.degree}</span>
+            <span className="hidden text-lab-line sm:inline">·</span>
+            <span>{site.education.school}</span>
+            <span className="hidden text-lab-line sm:inline">·</span>
+            <span>{site.education.university}</span>
+            <span className="hidden text-lab-line sm:inline">·</span>
+            <span>{site.education.year}</span>
+            <span className="hidden text-lab-line sm:inline">·</span>
+            <span>{site.location}</span>
+          </Reveal>
+        </div>
       </section>
 
       <section className="bg-[#EAF4FA] px-6 py-20">
