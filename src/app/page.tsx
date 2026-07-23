@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "@/components/Icons";
 import { GhostLink } from "@/components/GhostButton";
-import { OutlinedCard, Reveal } from "@/components/Reveal";
+import { Reveal } from "@/components/Reveal";
 import { labCapabilities, site } from "@/lib/site";
 import { projects } from "@/lib/projects";
 
@@ -12,6 +12,7 @@ export default function HomePage() {
 
   return (
     <div>
+      {/* 1 — Hero Mix 3: oversized CAPS name + academics inside slide */}
       <section className="relative flex min-h-[100svh] flex-col overflow-hidden px-6 pt-28 sm:pt-32">
         <div className="pointer-events-none absolute inset-0">
           <Image
@@ -19,39 +20,38 @@ export default function HomePage() {
             alt=""
             fill
             priority
-            className="object-cover object-center opacity-95"
+            className="object-cover object-center opacity-[0.92]"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-lab-bg/20" />
-          <div className="absolute inset-0 bg-gradient-to-b from-lab-bg/45 via-transparent to-lab-bg/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/25 to-white/75" />
         </div>
 
-        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center py-10 text-center sm:py-14">
+        <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center py-8 text-center sm:py-12">
           <Reveal>
-            <p className="text-[0.7rem] uppercase tracking-[0.28em] text-lab-muted sm:text-xs">
+            <p className="text-[0.7rem] uppercase tracking-[0.3em] text-lab-muted sm:text-xs">
               Food Processing Technology · R&D
             </p>
           </Reveal>
 
           <Reveal delay={0.06}>
-            <h1 className="mt-6 w-full font-display font-medium leading-[0.9] tracking-[-0.04em] text-lab-ink drop-shadow-[0_2px_20px_rgba(247,248,248,0.9)]">
-              <span className="block text-[clamp(3.4rem,14vw,9.5rem)]">
+            <h1 className="mt-5 w-full font-display font-medium uppercase leading-[0.88] tracking-[-0.03em] text-lab-ink drop-shadow-[0_2px_22px_rgba(255,255,255,0.95)]">
+              <span className="block text-[clamp(3.8rem,16vw,10.5rem)]">
                 Drashti
               </span>
-              <span className="mt-1 block text-[clamp(3.4rem,14vw,9.5rem)]">
+              <span className="mt-0 block text-[clamp(3.8rem,16vw,10.5rem)]">
                 Patel
               </span>
             </h1>
           </Reveal>
 
           <Reveal delay={0.12}>
-            <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-lab-ink/80 sm:mt-10 sm:text-lg">
+            <p className="mx-auto mt-7 max-w-xl text-base leading-relaxed text-lab-ink/80 sm:mt-9 sm:text-lg">
               {site.oneLiner}
             </p>
           </Reveal>
 
           <Reveal delay={0.18}>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-10">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:mt-9">
               <GhostLink href="/work">
                 Explore my work <ArrowRight size={16} />
               </GhostLink>
@@ -60,23 +60,26 @@ export default function HomePage() {
               </GhostLink>
             </div>
           </Reveal>
-        </div>
 
-        <div className="relative z-10 border-t border-lab-line/80 bg-white/90 px-2 py-5 sm:py-6">
-          <Reveal className="mx-auto flex max-w-content flex-col items-center gap-2 text-center text-sm text-lab-muted sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-7 sm:gap-y-2 sm:text-left">
-            <span className="text-lab-ink">{site.education.degree}</span>
-            <span className="hidden text-lab-line sm:inline">·</span>
-            <span>{site.education.school}</span>
-            <span className="hidden text-lab-line sm:inline">·</span>
-            <span>{site.education.university}</span>
-            <span className="hidden text-lab-line sm:inline">·</span>
-            <span>{site.education.year}</span>
-            <span className="hidden text-lab-line sm:inline">·</span>
-            <span>{site.location}</span>
+          <Reveal delay={0.24}>
+            <div className="mx-auto mt-10 max-w-4xl border-t border-lab-line/80 pt-5 sm:mt-12 sm:pt-6">
+              <p className="flex flex-col items-center gap-2 text-center text-[0.8rem] leading-relaxed text-lab-muted sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-3 sm:text-sm">
+                <span className="text-lab-ink">{site.education.degree}</span>
+                <span className="hidden sm:inline">·</span>
+                <span>{site.education.school}</span>
+                <span className="hidden sm:inline">·</span>
+                <span>{site.education.university}</span>
+                <span className="hidden sm:inline">·</span>
+                <span>{site.education.year}</span>
+                <span className="hidden sm:inline">·</span>
+                <span>{site.location}</span>
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
 
+      {/* Capabilities */}
       <section className="bg-[#EAF4FA] px-6 py-20">
         <div className="mx-auto max-w-content">
           <Reveal>
@@ -110,8 +113,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white px-6 py-20">
-        <div className="mx-auto grid max-w-content items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+      {/* 3 — Story: larger lab-coat face + sharp front portrait */}
+      <section className="bg-[#F4F7F8] px-6 py-20 sm:py-24">
+        <div className="mx-auto grid max-w-content items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.18em] text-lab-muted">
               Why I build
@@ -119,7 +123,7 @@ export default function HomePage() {
             <h2 className="mt-3 font-display text-3xl text-lab-ink sm:text-4xl">
               Decision-support for real R&D bottlenecks
             </h2>
-            <p className="mt-5 text-lab-muted leading-relaxed">
+            <p className="mt-5 max-w-lg text-lab-muted leading-relaxed">
               Formulation and thermal processing are scientifically sound—but
               often slow, expensive, or overly conservative. I build tools that
               help food scientists make better decisions earlier, without
@@ -129,40 +133,43 @@ export default function HomePage() {
               Read my story <ArrowRight size={16} />
             </GhostLink>
           </Reveal>
-          <Reveal delay={0.1}>
-            <div className="relative mx-auto h-[28rem] w-full max-w-md sm:h-[32rem]">
-              {/* Back layer — lab coat dissolves into the page background */}
-              <div className="absolute left-0 top-0 h-full w-[88%] overflow-hidden">
-                <Image
-                  src="/images/lab-coat.jpg"
-                  alt=""
-                  fill
-                  className="object-cover object-top opacity-40 saturate-50"
-                  sizes="(max-width: 768px) 85vw, 400px"
-                />
-                {/* Soft fade into surrounding white background on all edges */}
-                <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-white/90" />
-                <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-white" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/50" />
-                <div className="absolute inset-0 bg-white/20" />
-              </div>
-              {/* Front layer — sharp portrait stays crisp */}
-              <div className="absolute bottom-2 right-0 z-10 h-[78%] w-[68%] overflow-hidden rounded-card border border-white bg-white shadow-[0_18px_50px_rgba(30,36,48,0.16)] ring-1 ring-lab-line/50">
-                <Image
-                  src="/images/portfolio.jpeg"
-                  alt="Drashti Patel professional portrait"
-                  fill
-                  className="object-cover object-[center_15%]"
-                  sizes="(max-width: 768px) 70vw, 320px"
-                  priority
-                />
-              </div>
-            </div>
-          </Reveal>
+
+          <div className="relative mx-auto h-[30rem] w-full max-w-lg sm:h-[36rem]">
+            <Reveal
+              delay={0.05}
+              className="absolute inset-y-0 left-0 w-[92%] overflow-hidden"
+            >
+              <Image
+                src="/images/lab-coat.jpg"
+                alt="Drashti Patel in a lab coat"
+                fill
+                className="object-cover object-[center_12%] opacity-70 saturate-[0.85]"
+                sizes="(max-width: 1024px) 90vw, 520px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#F4F7F8] via-transparent to-[#F4F7F8]/80" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#F4F7F8]/70 via-transparent to-[#F4F7F8]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#F4F7F8] via-transparent to-transparent" />
+            </Reveal>
+
+            <Reveal
+              delay={0.18}
+              className="absolute bottom-0 right-0 z-10 h-[72%] w-[58%] overflow-hidden rounded-card border border-white bg-white shadow-[0_20px_55px_rgba(30,36,48,0.16)] ring-1 ring-lab-line/40 sm:w-[55%]"
+            >
+              <Image
+                src="/images/portfolio.jpeg"
+                alt="Drashti Patel professional portrait"
+                fill
+                className="object-cover object-[center_12%]"
+                sizes="(max-width: 1024px) 55vw, 300px"
+                priority
+              />
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      {/* 4 — Projects Option A: light blue + shimmer */}
+      <section className="bg-[#EAF4FA] px-6 py-20 sm:py-24">
         <div className="mx-auto max-w-content">
           <Reveal>
             <h2 className="font-display text-3xl text-lab-ink sm:text-4xl">
@@ -174,11 +181,11 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal className="mt-10">
-            <OutlinedCard className="p-0 overflow-hidden">
+            <div className="shimmer-card overflow-hidden p-0">
               <div className="grid lg:grid-cols-[1.2fr_0.8fr]">
                 <div className="p-8">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="rounded-pill border border-lab-teal/30 bg-lab-teal-soft px-2.5 py-1 text-xs text-lab-teal">
+                    <span className="rounded-pill border border-sky-300/60 bg-sky-50 px-2.5 py-1 text-xs text-sky-700">
                       Featured
                     </span>
                     <span className="text-xs text-lab-muted">{featured.status}</span>
@@ -198,7 +205,7 @@ export default function HomePage() {
                     )}
                   </div>
                 </div>
-                <div className="border-t border-lab-line bg-lab-bg p-8 lg:border-l lg:border-t-0">
+                <div className="border-t border-lab-line bg-white/70 p-8 lg:border-l lg:border-t-0">
                   <p className="text-xs uppercase tracking-[0.16em] text-lab-muted">
                     Snapshot
                   </p>
@@ -215,13 +222,13 @@ export default function HomePage() {
                   </ul>
                 </div>
               </div>
-            </OutlinedCard>
+            </div>
           </Reveal>
 
           <div className="mt-4 grid gap-4 md:grid-cols-2">
             {supporting.map((project, i) => (
               <Reveal key={project.slug} delay={i * 0.05}>
-                <OutlinedCard className="h-full">
+                <div className="shimmer-card h-full">
                   <p className="text-xs text-lab-muted">{project.status}</p>
                   <h3 className="mt-2 font-display text-2xl text-lab-ink">
                     {project.name}
@@ -233,22 +240,23 @@ export default function HomePage() {
                   >
                     View case study <ArrowRight size={14} />
                   </Link>
-                </OutlinedCard>
+                </div>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-lab-line bg-white px-6 py-16">
+      {/* Last — CTA Option B light blue */}
+      <section className="bg-[#E8F3F8] px-6 py-24 sm:py-28">
         <Reveal className="mx-auto max-w-content text-center">
-          <h2 className="font-display text-3xl text-lab-ink">
+          <h2 className="font-display text-3xl text-lab-ink sm:text-5xl">
             Open to R&D internships & research mentorship
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-lab-muted">
+          <p className="mx-auto mt-5 max-w-xl text-lab-muted">
             {site.education.school} · {site.location}
           </p>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-10 flex justify-center">
             <GhostLink href="/contact">
               Get in touch <ArrowRight size={16} />
             </GhostLink>
