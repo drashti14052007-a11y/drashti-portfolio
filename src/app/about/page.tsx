@@ -1,7 +1,27 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import {
+  Beaker,
+  Flask,
+  Leaf,
+  Lightbulb,
+  Microscope,
+  ShieldCheck,
+  Target,
+} from "@/components/Icons";
 import { GhostLink } from "@/components/GhostButton";
 import { OutlinedCard, Reveal } from "@/components/Reveal";
+import {
+  BlueprintGrid,
+  DnaCurve,
+  FlaskIllustration,
+} from "@/components/ScientificDecor";
+import {
+  academicJourney,
+  coreStrengths,
+  researchInterests,
+  toolStack,
+} from "@/lib/content";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -10,129 +30,243 @@ export const metadata: Metadata = {
     "About Drashti Patel — Food Processing Technology student building AI decision-support for food R&D.",
 };
 
+const strengthIcons = [
+  Flask,
+  Microscope,
+  Beaker,
+  ShieldCheck,
+  Lightbulb,
+  Target,
+];
+
+const panelFacts = [
+  "Food Processing Technology Student",
+  "Research & Development",
+  "Current Focus · Decision-support",
+  "Available for Internships",
+] as const;
+
 export default function AboutPage() {
   return (
-    <div className="px-6 pb-24 pt-32">
-      <div className="mx-auto max-w-content">
-        <Reveal>
-          <p className="text-xs uppercase tracking-[0.18em] text-lab-muted">
-            About
-          </p>
-          <h1 className="mt-3 font-display text-4xl text-lab-ink sm:text-5xl">
-            Building toward Executive-level food R&D
-          </h1>
-        </Reveal>
+    <div className="relative overflow-hidden px-6 pb-28 pt-32">
+      <BlueprintGrid className="opacity-50" />
+      <DnaCurve className="pointer-events-none absolute right-0 top-40 hidden h-[420px] w-auto opacity-70 lg:block" />
 
-        <div className="mt-12 grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="relative mx-auto max-w-content">
+        {/* Hero */}
+        <div className="grid items-start gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
           <Reveal>
-            <div className="overflow-hidden rounded-card border border-lab-line">
-              <Image
-                src="/images/portrait.jpg"
-                alt="Professional portrait of Drashti Patel"
-                width={720}
-                height={900}
-                className="h-auto w-full object-cover"
-                priority
-              />
-            </div>
-            <div className="mt-4 overflow-hidden rounded-card border border-lab-line">
-              <Image
-                src="/images/lab-coat.jpg"
-                alt="Drashti Patel wearing a lab coat"
-                width={720}
-                height={900}
-                className="h-auto w-full object-cover"
-              />
+            <div className="overflow-hidden rounded-card border border-lab-line bg-white shadow-lift">
+              <div className="relative aspect-[3/4] w-full">
+                <Image
+                  src="/images/portfolio.jpeg"
+                  alt="Portrait of Drashti Patel"
+                  fill
+                  priority
+                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 90vw, 480px"
+                />
+              </div>
+              <div className="border-t border-lab-line bg-lab-bg/40 p-5 sm:p-6">
+                <div className="flex flex-wrap gap-2 text-lab-teal">
+                  <Flask size={16} />
+                  <Microscope size={16} />
+                  <Beaker size={16} />
+                  <Leaf size={16} />
+                </div>
+                <ul className="mt-4 space-y-2.5">
+                  {panelFacts.map((fact) => (
+                    <li
+                      key={fact}
+                      className="flex items-start gap-2 text-sm text-lab-ink"
+                    >
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-lab-teal" />
+                      {fact}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-5 text-xs uppercase tracking-[0.16em] text-lab-muted">
+                  {site.location}
+                </p>
+              </div>
             </div>
           </Reveal>
 
-          <div className="space-y-10">
+          <div className="space-y-10 pt-2">
             <Reveal>
-              <h2 className="font-display text-2xl text-lab-ink">Who I am</h2>
-              <p className="mt-4 leading-relaxed text-lab-muted">
-                I am a second-year B.Tech student in Food Processing Technology
-                at {site.education.school}, affiliated with{" "}
-                {site.education.university}. My primary career focus is Research
-                & Development in the food industry—product development, process
-                optimization, food safety, and innovation.
+              <p className="text-xs uppercase tracking-[0.18em] text-lab-muted">
+                About
               </p>
-              <p className="mt-4 leading-relaxed text-lab-muted">
-                Alongside my core field, I develop frontend and UI/UX skills so I
-                can build usable digital tools for food-domain problems. Frontend
-                is not a separate career track—it is how I make scientific
-                decision-support accessible.
-              </p>
+              <h1 className="mt-3 font-display text-4xl text-lab-ink sm:text-5xl lg:text-6xl">
+                Building toward Executive-level food R&D
+              </h1>
             </Reveal>
 
-            <Reveal>
-              <h2 className="font-display text-2xl text-lab-ink">
-                Academic journey
+            <Reveal delay={0.05}>
+              <h2 className="font-display text-2xl text-lab-ink sm:text-3xl">
+                Who I Am
               </h2>
-              <OutlinedCard className="mt-4" hover={false}>
-                <p className="text-sm text-lab-ink">
-                  {site.education.degree}
+              <div className="mt-5 space-y-5 text-lab-muted leading-relaxed">
+                <p>
+                  Second-year B.Tech student in Food Processing Technology at{" "}
+                  {site.education.school}, affiliated with{" "}
+                  {site.education.university}.
                 </p>
-                <p className="mt-1 text-sm text-lab-muted">
-                  {site.education.school} · {site.education.university}
+                <p>
+                  Primary focus: Research & Development—product development,
+                  process optimization, food safety, and innovation.
                 </p>
-                <p className="mt-1 text-sm text-lab-muted">
-                  {site.education.year} · {site.location}
+                <p>
+                  Frontend and UI/UX are how I make scientific decision-support
+                  accessible—not a separate career track.
                 </p>
-                <p className="mt-4 text-sm leading-relaxed text-lab-muted">
-                  I enjoy laboratory coursework spanning formulation, process
-                  optimization, quality analysis, food chemistry, microbiology,
-                  preservation, safety, and sensory evaluation—and I extend that
-                  learning through independent research-oriented projects.
-                </p>
-              </OutlinedCard>
+              </div>
             </Reveal>
 
-            <Reveal>
+            <Reveal delay={0.08}>
               <h2 className="font-display text-2xl text-lab-ink">How I think</h2>
               <ul className="mt-4 space-y-3 text-sm leading-relaxed text-lab-muted">
                 <li>
-                  I translate food science concepts into practical digital tools
-                  (NoteStack, HeatGuard).
+                  Translate food science into practical tools (NoteStack,
+                  HeatGuard).
                 </li>
                 <li>
-                  I solve interdisciplinary problems at the intersection of Food
-                  Processing Technology, software, and AI.
+                  Work at the intersection of Food Processing Technology,
+                  software, and AI.
                 </li>
                 <li>
-                  I design for end users—scientific complexity should feel
-                  clear, not intimidating.
+                  Design for end users—scientific complexity should feel clear.
                 </li>
                 <li>
-                  I learn independently and communicate technical work through
-                  structured documentation and visuals.
+                  Learn independently and communicate through structured
+                  documentation.
                 </li>
               </ul>
-              <p className="mt-4 text-sm text-lab-muted">
-                I am actively expanding industrial/lab exposure and deepening
-                machine learning and food-process modelling toward
-                production-ready reliability.
-              </p>
-            </Reveal>
-
-            <Reveal>
-              <h2 className="font-display text-2xl text-lab-ink">
-                Focus domains
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed text-lab-muted">
-                Food formulation, sensory science, product development, process
-                optimization, food safety, and nutrition-driven innovation—
-                with particular interest in confectionery/chocolate, dairy,
-                bakery, ingredients/nutrition science, and regulatory research
-                environments such as Barry Callebaut, Lindt, Nestlé R&D,
-                Mondelez, PepsiCo, Amul, Britannia, Kerry, DSM-Firmenich, CFTRI,
-                FSSAI, and NIFTEM.
-              </p>
-              <GhostLink href="/contact" className="mt-6">
-                Open to mentorship & internships
-              </GhostLink>
             </Reveal>
           </div>
         </div>
+
+        {/* Academic Journey */}
+        <section className="mt-24 sm:mt-28">
+          <Reveal>
+            <p className="text-xs uppercase tracking-[0.18em] text-lab-muted">
+              Academic journey
+            </p>
+            <h2 className="mt-3 font-display text-3xl text-lab-ink sm:text-4xl">
+              From institute to research horizon
+            </h2>
+          </Reveal>
+
+          <div className="relative mt-12">
+            <div className="absolute left-0 right-0 top-[1.15rem] hidden h-px bg-lab-line md:block" />
+            <ol className="grid gap-6 md:grid-cols-5">
+              {academicJourney.map((step, i) => (
+                <Reveal key={step.title} delay={i * 0.05}>
+                  <li className="relative text-left">
+                    <span className="relative z-10 mb-4 flex h-9 w-9 items-center justify-center rounded-full border border-lab-teal/40 bg-white text-xs font-medium text-lab-teal shadow-lift">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-[0.7rem] uppercase tracking-[0.16em] text-lab-muted">
+                      {step.meta}
+                    </p>
+                    <h3 className="mt-2 font-display text-xl text-lab-ink">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-lab-muted">{step.detail}</p>
+                  </li>
+                </Reveal>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* Core Strengths */}
+        <section className="mt-24 sm:mt-28">
+          <Reveal>
+            <p className="text-xs uppercase tracking-[0.18em] text-lab-muted">
+              Core strengths
+            </p>
+            <h2 className="mt-3 font-display text-3xl text-lab-ink sm:text-4xl">
+              How I approach food R&D
+            </h2>
+          </Reveal>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {coreStrengths.map((item, i) => {
+              const Icon = strengthIcons[i]!;
+              return (
+                <Reveal key={item.title} delay={i * 0.04}>
+                  <OutlinedCard className="h-full">
+                    <Icon size={20} className="text-lab-teal" />
+                    <h3 className="mt-4 font-display text-xl text-lab-ink">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-lab-muted">
+                      {item.description}
+                    </p>
+                  </OutlinedCard>
+                </Reveal>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Research Interests */}
+        <section className="mt-24 sm:mt-28">
+          <Reveal>
+            <p className="text-xs uppercase tracking-[0.18em] text-lab-muted">
+              Research interests
+            </p>
+            <h2 className="mt-3 font-display text-3xl text-lab-ink sm:text-4xl">
+              Where curiosity concentrates
+            </h2>
+          </Reveal>
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            {researchInterests.map((interest, i) => (
+              <Reveal key={interest} delay={i * 0.03}>
+                <div className="rounded-card border border-lab-line bg-white px-4 py-5 text-center transition duration-200 ease-outCubic hover:-translate-y-1 hover:border-lab-teal/45 hover:shadow-lift">
+                  <p className="font-display text-lg text-lab-ink">{interest}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        {/* Tools */}
+        <section className="mt-24 sm:mt-28">
+          <Reveal>
+            <p className="text-xs uppercase tracking-[0.18em] text-lab-muted">
+              Tools
+            </p>
+            <h2 className="mt-3 font-display text-3xl text-lab-ink sm:text-4xl">
+              Technologies I use
+            </h2>
+          </Reveal>
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {toolStack.map((tool, i) => (
+              <Reveal key={tool} delay={i * 0.03}>
+                <div className="flex min-h-[88px] items-center justify-center rounded-card border border-lab-line bg-lab-teal-soft/25 px-4 py-5 text-sm font-medium text-lab-ink transition duration-200 ease-outCubic hover:border-lab-teal/40 hover:bg-white hover:shadow-lift">
+                  {tool}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        {/* Quote */}
+        <section className="relative mt-24 py-16 text-center sm:mt-28 sm:py-20">
+          <FlaskIllustration className="pointer-events-none absolute left-1/2 top-0 h-28 w-auto -translate-x-1/2 opacity-25" />
+          <Reveal>
+            <div className="mx-auto h-px w-24 bg-lab-line" />
+            <blockquote className="mx-auto mt-10 max-w-3xl font-display text-2xl leading-snug text-lab-ink sm:text-4xl">
+              “I believe technology should help scientists make better
+              decisions—not replace them.”
+            </blockquote>
+            <div className="mx-auto mt-10 h-px w-24 bg-lab-line" />
+            <GhostLink href="/contact" className="mt-10">
+              Open to mentorship & internships
+            </GhostLink>
+          </Reveal>
+        </section>
       </div>
     </div>
   );

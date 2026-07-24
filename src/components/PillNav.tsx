@@ -59,14 +59,17 @@ export function PillNav() {
                   href={item.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "relative rounded-pill px-3 py-2 text-sm text-lab-muted transition-colors hover:text-lab-ink",
+                    "relative rounded-pill px-3 py-2 text-sm text-lab-muted transition-all duration-200 ease-outCubic hover:text-lab-ink",
                     active && "text-lab-ink",
                   )}
                 >
                   {item.label}
-                  {active && (
-                    <span className="absolute inset-x-3 -bottom-0.5 h-px bg-lab-teal" />
-                  )}
+                  <span
+                    className={cn(
+                      "absolute inset-x-3 -bottom-0.5 h-px origin-left bg-lab-teal transition-transform duration-300 ease-outCubic",
+                      active ? "scale-x-100" : "scale-x-0",
+                    )}
+                  />
                 </Link>
               );
             })}
