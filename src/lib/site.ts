@@ -29,11 +29,11 @@ export const site = {
 } as const;
 
 export const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/work", label: "Work" },
-  { href: "/experience", label: "Experience" },
-  { href: "/contact", label: "Contact" },
+  { id: "home", href: "/#home", label: "Home" },
+  { id: "about", href: "/#about", label: "About" },
+  { id: "work", href: "/#work", label: "Work" },
+  { id: "experience", href: "/#experience", label: "Experience" },
+  { id: "contact", href: "/#contact", label: "Contact" },
 ] as const;
 
 export const labCapabilities = [

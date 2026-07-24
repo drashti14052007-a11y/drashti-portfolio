@@ -28,7 +28,7 @@ export function Footer() {
           >
             GitHub
           </a>
-          <Link href="/contact" className="hover:text-lab-teal">
+          <Link href="/#contact" className="hover:text-lab-teal">
             Contact
           </Link>
         </div>

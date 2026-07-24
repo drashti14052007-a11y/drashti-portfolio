@@ -45,7 +45,7 @@ export default async function CaseStudyPage({ params }: Props) {
       <div className="mx-auto max-w-content">
         <Reveal>
           <Link
-            href="/work"
+            href="/#work"
             className="inline-flex items-center gap-2 text-sm text-lab-muted hover:text-lab-teal"
           >
             <ArrowLeft size={14} /> All work

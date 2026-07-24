@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "@/components/Icons";
 import { GhostLink } from "@/components/GhostButton";
+import { HashScroll } from "@/components/HashScroll";
 import { HeroStats } from "@/components/HeroStats";
 import { Reveal } from "@/components/Reveal";
 import {
@@ -10,6 +11,10 @@ import {
   HeroScienceVisual,
   MoleculeSketch,
 } from "@/components/ScientificDecor";
+import { AboutSection } from "@/components/sections/AboutSection";
+import { ContactSection } from "@/components/sections/ContactSection";
+import { ExperienceSection } from "@/components/sections/ExperienceSection";
+import { WorkSection } from "@/components/sections/WorkSection";
 import { labCapabilities, site } from "@/lib/site";
 import { projectImages } from "@/lib/content";
 import { projects } from "@/lib/projects";
@@ -20,6 +25,10 @@ export default function HomePage() {
 
   return (
     <div>
+      <HashScroll />
+
+      {/* HOME — all existing slides kept intact; treated as one nav section */}
+      <section id="home" className="scroll-mt-24">
       {/* Hero — editorial two-column, preserved lab atmosphere + branding */}
       <section className="relative flex min-h-[100svh] flex-col overflow-hidden px-6 pt-28 sm:pt-32">
         <div className="pointer-events-none absolute inset-0">
@@ -65,7 +74,7 @@ export default function HomePage() {
 
               <Reveal delay={0.18}>
                 <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <GhostLink href="/work">
+                  <GhostLink href="/#work">
                     Explore my work <ArrowRight size={16} />
                   </GhostLink>
                   <GhostLink href={site.links.notestackLive} external>
@@ -138,7 +147,7 @@ export default function HomePage() {
               help food scientists make better decisions earlier, without
               replacing their expertise.
             </p>
-            <GhostLink href="/about" className="mt-10">
+            <GhostLink href="/#about" className="mt-10">
               Read my story <ArrowRight size={16} />
             </GhostLink>
           </Reveal>
@@ -272,12 +281,18 @@ export default function HomePage() {
             {site.education.school} · {site.location}
           </p>
           <div className="mt-10 flex justify-center">
-            <GhostLink href="/contact">
+            <GhostLink href="/#contact">
               Let&apos;s collaborate <ArrowRight size={16} />
             </GhostLink>
           </div>
         </Reveal>
       </section>
+      </section>
+
+      <AboutSection />
+      <WorkSection />
+      <ExperienceSection />
+      <ContactSection />
     </div>
   );
 }

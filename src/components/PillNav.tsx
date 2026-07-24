@@ -2,15 +2,28 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { Menu, X } from "@/components/Icons";
 import { navItems, site } from "@/lib/site";
 import { cn } from "@/lib/cn";
 
+const sectionIds = navItems.map((item) => item.id);
+
 export function PillNav() {
   const pathname = usePathname();
+  const onHome = pathname === "/";
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("home");
+  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const navRowRef = useRef<HTMLDivElement | null>(null);
+  const [underline, setUnderline] = useState({ left: 0, width: 0, opacity: 0 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -22,6 +35,104 @@ export function PillNav() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  // Seed active from hash when on home
+  useEffect(() => {
+    if (!onHome) {
+      if (pathname.startsWith("/work")) setActive("work");
+      else setActive("");
+      return;
+    }
+    const hash = window.location.hash.replace("#", "");
+    if (hash && sectionIds.includes(hash as (typeof sectionIds)[number])) {
+      setActive(hash);
+    } else {
+      setActive("home");
+    }
+  }, [onHome, pathname]);
+
+  // Scroll spy — all Home slides live under #home, so Home stays active until About
+  useEffect(() => {
+    if (!onHome) return;
+
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) =>
+              Math.abs(a.boundingClientRect.top) -
+              Math.abs(b.boundingClientRect.top),
+          );
+
+        if (visible[0]?.target?.id) {
+          const id = visible[0].target.id;
+          setActive(id);
+          const nextHash = `#${id}`;
+          if (window.location.hash !== nextHash) {
+            window.history.replaceState(null, "", nextHash);
+          }
+        }
+      },
+      {
+        root: null,
+        rootMargin: "-35% 0px -45% 0px",
+        threshold: [0, 0.1, 0.25, 0.5],
+      },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [onHome]);
+
+  const updateUnderline = useCallback(() => {
+    const row = navRowRef.current;
+    const link = linkRefs.current[active];
+    if (!row || !link) {
+      setUnderline((u) => ({ ...u, opacity: 0 }));
+      return;
+    }
+    const rowRect = row.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    setUnderline({
+      left: linkRect.left - rowRect.left + 12,
+      width: Math.max(linkRect.width - 24, 12),
+      opacity: 1,
+    });
+  }, [active]);
+
+  useLayoutEffect(() => {
+    updateUnderline();
+  }, [updateUnderline, open]);
+
+  useEffect(() => {
+    window.addEventListener("resize", updateUnderline);
+    return () => window.removeEventListener("resize", updateUnderline);
+  }, [updateUnderline]);
+
+  const scrollTo = useCallback(
+    (id: string) => {
+      setOpen(false);
+
+      if (!onHome) {
+        window.location.href = `/#${id}`;
+        return;
+      }
+
+      const el = document.getElementById(id);
+      if (!el) return;
+      setActive(id);
+      window.history.replaceState(null, "", `#${id}`);
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    },
+    [onHome],
+  );
 
   return (
     <>
@@ -40,47 +151,62 @@ export function PillNav() {
             scrolled && "-translate-y-0.5",
           )}
         >
-          <Link
-            href="/"
+          <button
+            type="button"
+            onClick={() => scrollTo("home")}
             className="hidden rounded-pill px-3 py-2 text-xs font-semibold tracking-[0.14em] text-lab-ink sm:inline"
           >
             DP
-          </Link>
+          </button>
 
-          <div className="hidden items-center gap-1 md:flex">
+          <div
+            ref={navRowRef}
+            className="relative hidden items-center gap-1 md:flex"
+          >
             {navItems.map((item) => {
-              const active =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.href);
+              const isActive = active === item.id;
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
+                <a
+                  key={item.id}
+                  ref={(el) => {
+                    linkRefs.current[item.id] = el;
+                  }}
+                  href={`/#${item.id}`}
+                  aria-current={isActive ? "page" : undefined}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollTo(item.id);
+                  }}
                   className={cn(
-                    "relative rounded-pill px-3 py-2 text-sm text-lab-muted transition-all duration-200 ease-outCubic hover:text-lab-ink",
-                    active && "text-lab-ink",
+                    "relative rounded-pill px-3 py-2 text-sm text-lab-muted transition-colors duration-200 ease-outCubic hover:text-lab-ink",
+                    isActive && "text-lab-ink",
                   )}
                 >
                   {item.label}
-                  <span
-                    className={cn(
-                      "absolute inset-x-3 -bottom-0.5 h-px origin-left bg-lab-teal transition-transform duration-300 ease-outCubic",
-                      active ? "scale-x-100" : "scale-x-0",
-                    )}
-                  />
-                </Link>
+                </a>
               );
             })}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-0.5 h-px bg-lab-teal transition-all duration-300 ease-outCubic"
+              style={{
+                left: underline.left,
+                width: underline.width,
+                opacity: underline.opacity,
+              }}
+            />
           </div>
 
-          <Link
-            href="/contact"
+          <a
+            href="/#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollTo("contact");
+            }}
             className="rounded-pill border border-lab-ink/20 px-3 py-2 text-sm text-lab-ink transition hover:border-lab-teal hover:text-lab-teal"
           >
             Contact
-          </Link>
+          </a>
 
           <button
             type="button"
@@ -105,13 +231,20 @@ export function PillNav() {
           </p>
           <div className="flex flex-col gap-2">
             {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="rounded-card border border-lab-line bg-white px-4 py-3 text-lg text-lab-ink"
+              <a
+                key={item.id}
+                href={`/#${item.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollTo(item.id);
+                }}
+                className={cn(
+                  "rounded-card border border-lab-line bg-white px-4 py-3 text-lg text-lab-ink",
+                  active === item.id && "border-lab-teal text-lab-teal",
+                )}
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
           </div>
         </div>
